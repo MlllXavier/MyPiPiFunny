@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pipigrp.pipidemo.dao.UserinfoMapper">
+  <resultMap id="BaseResultMap" type="pipigrp.pipidemo.pojo.Userinfo">
+    <constructor>
+      <idArg column="pp_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nickname" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="sign" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="sex" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="birthday" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="occupation" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="photopath" javaType="java.lang.String" jdbcType="CHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    pp_id, nickname, sign, sex, birthday, occupation, photopath
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where pp_id = #{ppId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from userinfo
+    where pp_id = #{ppId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="pipigrp.pipidemo.pojo.Userinfo">
+    insert into userinfo (pp_id, nickname, sign, 
+      sex, birthday, occupation, photopath
+      )
+    values (#{ppId,jdbcType=VARCHAR}, #{nickname,jdbcType=CHAR}, #{sign,jdbcType=CHAR}, 
+      #{sex,jdbcType=CHAR}, #{birthday,jdbcType=CHAR}, #{occupation,jdbcType=CHAR}, #{photopath,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pipigrp.pipidemo.pojo.Userinfo">
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ppId != null">
+        pp_id,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="occupation != null">
+        occupation,
+      </if>
+      <if test="photopath != null">
+        photopath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ppId != null">
+        #{ppId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=CHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=CHAR},
+      </if>
+      <if test="occupation != null">
+        #{occupation,jdbcType=CHAR},
+      </if>
+      <if test="photopath != null">
+        #{photopath,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pipigrp.pipidemo.pojo.Userinfo">
+    update userinfo
+    <set>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=CHAR},
+      </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=CHAR},
+      </if>
+      <if test="occupation != null">
+        occupation = #{occupation,jdbcType=CHAR},
+      </if>
+      <if test="photopath != null">
+        photopath = #{photopath,jdbcType=CHAR},
+      </if>
+    </set>
+    where pp_id = #{ppId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pipigrp.pipidemo.pojo.Userinfo">
+    update userinfo
+    set nickname = #{nickname,jdbcType=CHAR},
+      sign = #{sign,jdbcType=CHAR},
+      sex = #{sex,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=CHAR},
+      occupation = #{occupation,jdbcType=CHAR},
+      photopath = #{photopath,jdbcType=CHAR}
+    where pp_id = #{ppId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

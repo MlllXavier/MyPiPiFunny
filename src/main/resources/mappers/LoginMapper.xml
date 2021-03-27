@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pipigrp.pipidemo.dao.LoginMapper">
+  <resultMap id="BaseResultMap" type="pipigrp.pipidemo.pojo.Login">
+    <constructor>
+      <idArg column="pp_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="username" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="password" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    pp_id, username, password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from login
+    where pp_id = #{ppId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from login
+    where pp_id = #{ppId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="pipigrp.pipidemo.pojo.Login">
+    insert into login (pp_id, username, password
+      )
+    values (#{ppId,jdbcType=VARCHAR}, #{username,jdbcType=CHAR}, #{password,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pipigrp.pipidemo.pojo.Login">
+    insert into login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ppId != null">
+        pp_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ppId != null">
+        #{ppId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pipigrp.pipidemo.pojo.Login">
+    update login
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pp_id = #{ppId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pipigrp.pipidemo.pojo.Login">
+    update login
+    set username = #{username,jdbcType=CHAR},
+      password = #{password,jdbcType=INTEGER}
+    where pp_id = #{ppId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pipigrp.pipidemo.dao.FollowMapper">
+  <resultMap id="BaseResultMap" type="pipigrp.pipidemo.pojo.Follow">
+    <constructor>
+      <idArg column="id_follow" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="follower_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pp_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_follow, follower_id, pp_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from follow
+    where id_follow = #{idFollow,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from follow
+    where id_follow = #{idFollow,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="pipigrp.pipidemo.pojo.Follow">
+    insert into follow (id_follow, follower_id, pp_id
+      )
+    values (#{idFollow,jdbcType=VARCHAR}, #{followerId,jdbcType=VARCHAR}, #{ppId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pipigrp.pipidemo.pojo.Follow">
+    insert into follow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idFollow != null">
+        id_follow,
+      </if>
+      <if test="followerId != null">
+        follower_id,
+      </if>
+      <if test="ppId != null">
+        pp_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idFollow != null">
+        #{idFollow,jdbcType=VARCHAR},
+      </if>
+      <if test="followerId != null">
+        #{followerId,jdbcType=VARCHAR},
+      </if>
+      <if test="ppId != null">
+        #{ppId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pipigrp.pipidemo.pojo.Follow">
+    update follow
+    <set>
+      <if test="followerId != null">
+        follower_id = #{followerId,jdbcType=VARCHAR},
+      </if>
+      <if test="ppId != null">
+        pp_id = #{ppId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_follow = #{idFollow,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pipigrp.pipidemo.pojo.Follow">
+    update follow
+    set follower_id = #{followerId,jdbcType=VARCHAR},
+      pp_id = #{ppId,jdbcType=VARCHAR}
+    where id_follow = #{idFollow,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

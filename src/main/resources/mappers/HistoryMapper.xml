@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pipigrp.pipidemo.dao.HistoryMapper">
+  <resultMap id="BaseResultMap" type="pipigrp.pipidemo.pojo.History">
+    <constructor>
+      <idArg column="id_history" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="pp_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="time" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="viewing_time" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id_history, pp_id, id, time, viewing_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="pipigrp.pipidemo.pojo.HistoryKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from history
+    where id_history = #{idHistory,jdbcType=VARCHAR}
+      and pp_id = #{ppId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="pipigrp.pipidemo.pojo.HistoryKey">
+    delete from history
+    where id_history = #{idHistory,jdbcType=VARCHAR}
+      and pp_id = #{ppId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="pipigrp.pipidemo.pojo.History">
+    insert into history (id_history, pp_id, id, 
+      time, viewing_time)
+    values (#{idHistory,jdbcType=VARCHAR}, #{ppId,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, 
+      #{time,jdbcType=CHAR}, #{viewingTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pipigrp.pipidemo.pojo.History">
+    insert into history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idHistory != null">
+        id_history,
+      </if>
+      <if test="ppId != null">
+        pp_id,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="viewingTime != null">
+        viewing_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idHistory != null">
+        #{idHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="ppId != null">
+        #{ppId,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=CHAR},
+      </if>
+      <if test="viewingTime != null">
+        #{viewingTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pipigrp.pipidemo.pojo.History">
+    update history
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=CHAR},
+      </if>
+      <if test="viewingTime != null">
+        viewing_time = #{viewingTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_history = #{idHistory,jdbcType=VARCHAR}
+      and pp_id = #{ppId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pipigrp.pipidemo.pojo.History">
+    update history
+    set id = #{id,jdbcType=VARCHAR},
+      time = #{time,jdbcType=CHAR},
+      viewing_time = #{viewingTime,jdbcType=VARCHAR}
+    where id_history = #{idHistory,jdbcType=VARCHAR}
+      and pp_id = #{ppId,jdbcType=VARCHAR}
+  </update>
+</mapper>
